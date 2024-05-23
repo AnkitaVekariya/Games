@@ -1,0 +1,67 @@
+import random 
+import time
+
+Red="R"
+Blue="B"
+Green="G"
+Yellow="Y"
+
+def Gen_Seq(length):
+    return [random.choice([Red, Green, Yellow, Blue])for _ in range(length)]
+
+def Display_Seq(sequence):
+    for seq in sequence:
+        print(seq, end=' ')
+        time.sleep(1)
+        print("\r",end='')
+        time.sleep(0.5)
+        
+def User_Seq(length):
+    User_ans=[]
+    print("Enter Your Sequnce One By One in (R B G Y): ")
+    while len(User_ans) < length:
+        User_ip=input().strip(" ").upper()
+        if User_ip in (Red, Blue, Green, Yellow):
+            User_ans.append(User_ip)
+        else:
+            print("Invalid Input. Enter only (R B G Y) ")
+    return User_ans
+
+def Check_Seq(sequence, user_seq):
+    return sequence == user_seq
+
+def main():
+    print("-----Welcome To The Simon Game-----")
+    print()
+    
+    length=1
+    score=0
+    loop="1"
+    
+    while loop=="1":
+        sequence=Gen_Seq(length)
+    
+        print("--Sequence--:")
+        Display_Seq(sequence)
+
+        print("--Your Turn--:")
+        User_Ans=User_Seq(length)
+        
+    
+        if Check_Seq(User_Ans, sequence):
+            score=score+length
+            print("Congo... You Win ! Your Score is: ",score)
+            print("to Continue press 1")
+            loop=input()
+
+        else:
+            print("Oops You Made Mistake. Your Score Is: ",score)
+            loop=2
+        length=length+1
+            
+    
+        
+if __name__=="__main__":
+    main()
+
+            
